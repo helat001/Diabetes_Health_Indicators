@@ -1,0 +1,120 @@
+---
+title: "Analysis of Diabetes Predictors"
+output: html_document
+date: "2025-04-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+install.packages("tidyverse")
+install.packages("ggplot2")
+
+library(tidyverse)   
+library(ggplot2)  
+
+# 1. Load and Understand the Dataset
+
+diabetes_data <- read_csv("~/Desktop/R Project/diabetes_012_health_indicators_BRFSS2015.csv")
+
+# Preview the data
+head(diabetes_data)
+
+# ========================================================
+
+# 2. Visualize BMI Distribution 
+
+# Rename Diabetes column
+diabetes_data <- diabetes_data %>% rename(Diabetes = Diabetes_012)
+
+# Plot BMI distribution by Diabetes status
+ggplot(diabetes_data, aes(x = BMI, fill = as.factor(Diabetes))) +
+  geom_histogram(position = "identity", alpha = 0.6, bins = 30) +
+  labs(title = "BMI Distribution by Diabetes Status",
+       x = "BMI",
+       fill = "Diabetes (0=No, 1=Prediabetes, 2=Yes)")
+       
+# ========================================================
+
+# 3. Data Preparation & Wrangling
+
+diabetes_clean <- diabetes_data %>%
+  filter(Diabetes != 1) %>%                         
+  mutate(Diabetes = ifelse(Diabetes == 2, 1, 0)) %>%
+  drop_na()
+  
+  summary(diabetes_clean)
+  
+# ========================================================
+
+# 4. Exploratory Data Analysis (EDA)
+
+# What are the distributions and counts?
+
+class_balance <- diabetes_clean %>%
+  group_by(Diabetes) %>%
+  summarise(Count = n(), Percentage = n() / nrow(diabetes_clean) * 100)
+  View(class_balance)
+  
+# ========================================================
+  
+# 5. Feature Selection
+
+# Full logistic regression model
+model_full <- glm(Diabetes ~ ., data = diabetes_clean, family = "binomial")
+
+# Check significance of all variables
+summary(model_full)
+
+summary_df <- as.data.frame(summary(model_full)$coefficients)
+View(summary_df)
+
+# ========================================================
+
+
+# 6. Top 4 Features
+
+# Features chosen based on p-values
+# BMI, Age, and HighBP were selected as core features for all models due to their strong statistical significance and clear medical relevance.
+# Model 1 will use DiffWalk | Model 2 will use HeartDiseaseorAttack
+
+features_model1 <- c("BMI", "Age", "HighBP", "DiffWalk")
+features_model2 <- c("BMI", "Age", "HighBP", "HeartDiseaseorAttack")
+
+
+# 7. Model Development: Logistic Regression
+
+# Train-test split
+set.seed(123)
+train_indices <- sample(1:nrow(diabetes_clean), size = 0.8 * nrow(diabetes_clean))
+train_data <- diabetes_clean[train_indices, ]
+test_data <- diabetes_clean[-train_indices, ]
+
+# Model 1: DiffWalk
+model1 <- glm(Diabetes ~ ., data = train_data[, c("Diabetes", features_model1)], family = "binomial")
+predictions1 <- predict(model1, newdata = test_data[, features_model1], type = "response")
+predicted_classes1 <- ifelse(predictions1 > 0.5, 1, 0)
+
+# Model 2: HeartDiseaseorAttack
+model2 <- glm(Diabetes ~ ., data = train_data[, c("Diabetes", features_model2)], family = "binomial")
+predictions2 <- predict(model2, newdata = test_data[, features_model2], type = "response")
+predicted_classes2 <- ifelse(predictions2 > 0.5, 1, 0)
+
+# ========================================================
+# 8. Model Evaluation
+# How accurate is each model?
+
+# Model 1 Evaluation
+confusion_matrix1 <- table(Predicted = predicted_classes1, Actual = test_data$Diabetes)
+accuracy1 <- sum(diag(confusion_matrix1)) / sum(confusion_matrix1)
+cat("Model 1 (DiffWalk) Accuracy:", round(accuracy1 * 100, 2), "%\n")
+print(confusion_matrix1)
+
+# Model 2 Evaluation
+confusion_matrix2 <- table(Predicted = predicted_classes2, Actual = test_data$Diabetes)
+accuracy2 <- sum(diag(confusion_matrix2)) / sum(confusion_matrix2)
+cat("Model 2 (HeartDiseaseorAttack) Accuracy:", round(accuracy2 * 100, 2), "%\n")
+print(confusion_matrix2)
