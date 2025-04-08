@@ -1,5 +1,5 @@
 # Predicting Diabetes Risk – Logistic Regression in R  
-**Author**: Houcine E  
+**Author**: Houcine El A  
 **Project Type**: Statistical Modeling & Health Analytics  
 **Presentation**: [Watch the Video](#) *(Link will go here)*
 
