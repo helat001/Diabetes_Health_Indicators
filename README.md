@@ -7,7 +7,9 @@
 
 ## Project Overview  
 In this project, I used logistic regression in R to analyze health and lifestyle data from the BRFSS 2015 dataset. My goal was to identify key predictors of diabetes, compare two predictive models using different feature sets, and evaluate their performance. The process included data wrangling, exploratory data analysis, feature selection, model training, and evaluation.
+
 ---
+
 
 ## Code
 
