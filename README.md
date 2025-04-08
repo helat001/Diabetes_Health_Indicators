@@ -51,9 +51,8 @@ This model used BMI, Age, HighBP, and HeartDiseaseorAttack.
 
 ## Code
 
-📄 You can view the full R code here:  
-**[R_Code_Diabetes_Analysis.Rmd](r-project/R_Code_Diabetes_Analysis.Rmd)**  
-> *(Replace the path with the actual location of your R script once uploaded to GitHub)*
+You can view the full R code here:  
+**[R_Project_Diabetes.Rmd](R_Project_Diabetes.Rmd)**  
 
 ---
 
