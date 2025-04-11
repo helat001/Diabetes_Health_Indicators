@@ -35,7 +35,7 @@ After excluding prediabetic cases, I created a binary target (0 = No Diabetes, 1
 ---
 
 ### 3. Feature Significance – Full Model  
-I ran a full logistic regression to identify statistically significant predictors. Features like **BMI, Age, HighBP, GenHlth, and DiffWalk** had strong positive associations with diabetes. I used the resulting p-values to select features for two focused models.
+I ran a full logistic regression to identify statistically significant predictors. Features like **BMI, Age, HighBP, GenHlth ** had strong positive associations with diabetes. I used the resulting p-values to select features for two focused models.
 
 ![Feature Significance](feature_significance_table.png)
 
