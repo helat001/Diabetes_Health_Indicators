@@ -14,7 +14,7 @@ In this project, I used logistic regression in R to analyze health and lifestyle
 ## Code
 
 You can view the full R code here:  
-**[R_Project_Diabetes.Rmd](R_Diabetes.Rmd)**  
+**[R_Diabetes.Rmd](R_Diabetes.Rmd)**  
 
 ---
 
