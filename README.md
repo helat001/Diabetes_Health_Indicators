@@ -1,7 +1,17 @@
 # Predicting Diabetes Risk – Logistic Regression in R  
 **Author**: Houcine El  
 **Project Type**: Statistical Modeling & Health Analytics  
-**Presentation**: [Watch the Video](#) *(Link will go here)*
+## Video Presentation
+
+<div align="center">
+  <a href="https://youtu.be/O0pOPQngssI">
+    <img src="https://img.youtube.com/vi/O0pOPQngssI/mqdefault.jpg" alt="Customer Churn Prediction" width="400">
+  </a>
+  <br>
+  <a href="https://youtu.be/O0pOPQngssI">
+    <img src="https://img.shields.io/badge/Watch_Video-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch on YouTube" style="vertical-align:middle">
+  </a>
+</div>
 
 ---
 
