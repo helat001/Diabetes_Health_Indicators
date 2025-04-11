@@ -43,15 +43,15 @@ I ran a full logistic regression to identify statistically significant predictor
 
 ### 4. Model Evaluation – Logistic Regression
 
-#### Model 1: DiffWalk  
-This model used BMI, Age, HighBP, and DiffWalk.  
-**Accuracy: 85.79%**
+#### Model 1: 
+This model used "BMI", "HighChol", "HighBP", "Age" 
+**Accuracy: 85.93%**
 
 ![Model 1 Confusion Matrix](model1_evaluation.png)
 
-#### Model 2: HeartDiseaseorAttack  
-This model used BMI, Age, HighBP, and HeartDiseaseorAttack.  
-**Accuracy: 85.85%**
+#### Model 2:
+This model used "BMI", "HighChol", "HighBP", "HvyAlcoholConsump"
+**Accuracy: 85.89%**
 
 ![Model 2 Confusion Matrix](model2_evaluation.png)
 
